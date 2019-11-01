@@ -15,7 +15,37 @@
 			$conn->query("INSERT INTO traces (`name`, `response`, `date`) VALUES ('".$host."', '".$output."', '".date('Y-m-d h:i:s')."')");
 		}
 	}
+
+
+	function is_valid_ip($ip='', $ip_type=''){
+
+    $isValid=false;
+
+    if($ip_type=='ipv4'){
+
+        //validates IPV4
+        $isValid = filter_var($ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4);
+    }
+    elseif($ip_type=='ipv6'){
+
+        //validates IPV6
+        $isValid = filter_var($ip, FILTER_VALIDATE_IP,FILTER_FLAG_IPV6);
+    }
+    else{
+
+        //validates IPV4 and IPV6
+        $isValid = filter_var($ip, FILTER_VALIDATE_IP);
+    }
+
+    if($isValid == $ip){
+
+        $isValid=true;
+    }
+
+    return $isValid;
+}
 ?>
+
 
 <!DOCTYPE html>
 <html>
